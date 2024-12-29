@@ -91,10 +91,10 @@
 
         layer_5 {
             bindings = <
-&bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &trans            &sys_reset  &trans      &trans           &rgb_ug RGB_BRD  &rgb_ug RGB_BRI  &rgb_ug RGB_HUI
-&kp CAPSLOCK  &bt BT_PRV    &bt BT_NXT    &trans        &trans        &bt BT_CLR        &trans      &bl BL_TOG  &rgb_ug RGB_TOG  &rgb_ug RGB_EFR  &rgb_ug RGB_EFF  &rgb_ug RGB_HUD
-&trans        &trans        &trans        &trans        &trans        &bt BT_CLR_ALL    &trans      &trans      &trans           &rgb_ug RGB_SAD  &rgb_ug RGB_SAI  &rgb_ug RGB_SPD
-                                          &trans        &trans        &trans            &trans      &trans      &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &kp KP_NUMLOCK   &kp KP_N7        &kp KP_NUMBER_8  &kp KP_NUMBER_9  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &kp KP_PLUS      &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &kp KP_NUMBER_0  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &trans  &trans
+                        &trans  &trans  &trans    &trans           &trans           &trans
             >;
         };
 
