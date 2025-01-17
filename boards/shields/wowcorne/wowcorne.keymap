@@ -5,11 +5,10 @@
  */
 
 #include <dt-bindings/zmk/mouse.h>
-#include <behaviors.dtsi>
-#include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/bt.h>
 #include <behaviors/mouse_keys.dtsi>
-
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/keys.h>
 
 #define WIN 0
 #define MAC 1
@@ -30,6 +29,7 @@
 #define LT_SPACE &lt MSE SPACE
 
 // winos keycodes
+
 #define WHF &hm LCTRL F
 #define WHD &hm LALT D
 #define WHJ &hm RCTRL J
@@ -37,8 +37,8 @@
 #define LANGW &mt RSHFT RALT
 #define ESCW &mt LGUI ESC
 
-
 // macos keycodes
+
 #define MHF &hm LGUI F
 #define MHD &hm LALT D
 #define MHJ &hm RGUI J
@@ -48,12 +48,10 @@
 #define LANGM &mt RALT LC(SPACE)
 #define ESCM &mt LCTRL ESC
 
+&mt { tapping-term-ms = <125>; };
 
-&mt {
-    tapping-term-ms = <125>;
-};
 / {
-     behaviors {
+    behaviors {
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -62,15 +60,10 @@
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
- };
+    };
 
-combos {
+    combos {
         compatible = "zmk,combos";
-
-        a-ad {
-            bindings = <&kp LEFT_WIN>;
-            key-positions = <36 37>;
-        };
 
         a-zk {
             bindings = <&kp B>;
@@ -159,6 +152,34 @@ combos {
             label = "NEW_BEHAVIOR";
             #binding-cells = <1>;
         };
+
+        tabesctap: tabesctap {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TABESCTAP";
+            #binding-cells = <0>;
+            bindings = <&kp TAB>, <&kp ESC>;
+
+            tapping-term-ms = <170>;
+        };
+
+        spacelayer: spacelayer {
+            compatible = "zmk,behavior-hold-tap";
+            label = "SPACELAYER";
+            bindings = <&mo>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <400>;
+            flavor = "tap-preferred";
+        };
+
+        shiftmonum: shiftmonum {
+            compatible = "zmk,behavior-tap-dance";
+            label = "SHIFTMONUM";
+            #binding-cells = <0>;
+            bindings = <&kp LEFT_SHIFT>, <&none>;
+
+            tapping-term-ms = <250>;
+        };
     };
 
     keymap {
@@ -172,10 +193,10 @@ combos {
             //                    |LCTRL| LALT| SP |   | SPACE | RSE  | RALT |
 
             bindings = <
-&kp ESC    &kp Q  &kp W  &kp E      &kp R         &kp T    &kp Y      &kp U          &kp I      &kp O    &kp P     &kp BSPC
-&kp TAB    &kp A  &kp S  &kp D      &kp F         &kp G    &kp H      &kp J          &kp K      &kp L    &kp SEMI  &kp ENTER
-&kp LSHFT  &kp Z  &kp X  &kp C      &kp V         &kp B    &kp N      &kp M          &kp COMMA  &kp DOT  &kp FSLH  &kp RSHFT
-                         &kp LCTRL  &kp LEFT_ALT  &mo 1    &kp SPACE  &kp RIGHT_ALT  &mo 2
+&tabesctap  &kp Q  &kp W  &kp E         &kp R         &kp T          &kp Y  &kp U        &kp I          &kp O    &kp P     &kp BSPC
+&kp LCTRL   &kp A  &kp S  &kp D         &kp F         &kp G          &kp H  &kp J        &kp K          &kp L    &kp SEMI  &kp SQT
+&kp LSHFT   &kp Z  &kp X  &kp C         &kp V         &kp B          &kp N  &kp M        &kp COMMA      &kp DOT  &kp FSLH  &kp ENTER
+                          &kp LEFT_WIN  &kp LEFT_ALT  &lt 1 SPACE    &mo 2  &lt 3 SPACE  &kp RIGHT_ALT
             >;
         };
 
@@ -187,10 +208,10 @@ combos {
             //                    | GUI |     | SPC |   | ENT |     | ALT |
 
             bindings = <
-&kp TILDE  &kp EXCLAMATION  &kp UP_ARROW  &kp UP_ARROW  &mkp RCLK     &mkp LCLK         &kp N7        &kp N8        &kp N9        &kp A           &kp EXCLAMATION  &kp BSPC
-&kp CAPS   &kp LEFT         &kp LEFT      &kp DOWN      &msc SCRL_UP  &msc SCRL_DOWN    &kp NUMBER_4  &kp N5        &kp NUMBER_6  &mkp MB1        &mmv MOVE_UP     &mkp MB2
-&kp LSHFT  &trans           &trans        &trans        &kp PAGE_UP   &kp PAGE_DOWN     &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &mmv MOVE_LEFT  &mmv MOVE_DOWN   &mmv MOVE_RIGHT
-                                          &kp LCTRL     &kp LEFT_ALT  &kp SPACE         &kp N0        &kp DOT       &kp RALT
+&kp ESCAPE           &kp EXCLAMATION  &kp AT  &kp HASH  &kp DOLLAR  &kp PERCENT    &kp LCTRL  &kp AMPERSAND  &kp ASTERISK  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp DEL
+&mt LEFT_CONTROL F1  &kp F2           &kp F3  &kp F4    &kp F5      &kp F6         &trans     &kp UNDER      &kp PLUS      &kp LEFT_BRACE        &kp RIGHT_BRACE        &kp PIPE
+&mt LSHFT F7         &kp F8           &kp F9  &kp F10   &kp F11     &kp F12        &trans     &kp PIPE       &kp PIPE      &kp PIPE              &kp BACKSLASH          &kp ESCAPE
+                                              &trans    &trans      &trans         &mo 5      &trans         &trans
             >;
         };
 
@@ -202,11 +223,38 @@ combos {
             //                    | GUI |     | SPC |   | ENT |     | ALT |
 
             bindings = <
-&kp TILDE  &kp EXCL  &kp AT  &kp HASH   &kp DLLR      &kp PRCNT    &kp F2     &kp F4                &kp UP_ARROW           &kp UP_ARROW  &kp MINUS     &kp BSPC
-&kp LCTRL  &kp F2    &kp F4  &kp F5     &kp F7        &kp F10      &kp F7     &kp LEFT              &kp LEFT               &kp DOWN      &kp RIGHT     &kp GRAVE
-&kp LSHFT  &trans    &trans  &trans     &trans        &trans       &kp F10    &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp PERCENT   &kp QUESTION  &kp TILDE
-                             &kp LCTRL  &kp LEFT_ALT  &kp SPACE    &kp SPACE  &trans                &kp RALT
+&kp GRAVE    &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4          &kp N5                   &kp NUMBER_6   &kp N7     &kp N8     &kp N9            &kp N0             &kp BSPC
+&kp LCTRL    &kp EXCL      &kp AT        &kp HASH      &kp DOLLAR            &kp PERCENT              &kp MINUS      &kp MINUS  &kp EQUAL  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp PIPE
+&shiftmonum  &kp CARET     &kp AMPS      &kp ASTERISK  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS    &kp BACKSLASH  &kp UNDER  &kp PLUS   &kp SLASH         &kp BACKSLASH      &kp TILDE
+                                         &trans        &trans                &mo 5                    &trans         &trans     &trans
+            >;
+        };
+
+        layer_3 {
+            bindings = <
+&kp ESC  &kp N1    &kp N2    &kp N3  &kp N4     &kp N5       &kp N6  &kp N7    &kp N8         &kp N9     &kp N0     &kp DEL
+&trans   &kp LEFT  &kp DOWN  &kp UP  &kp SPACE  &trans       &trans  &kp LEFT  &kp DOWN       &kp UP     &kp RIGHT  &trans
+&trans   &trans    &trans    &trans  &trans     &trans       &trans  &kp END   &kp PAGE_DOWN  &kp PG_UP  &kp HOME   &trans
+                             &trans  &kp SPACE  &kp SPACE    &trans  &mo 3     &trans
+            >;
+        };
+
+        layer_4 {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+                        &trans  &trans  &trans    &trans  &trans  &trans
+            >;
+        };
+
+        layer_5 {
+            bindings = <
+&bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &trans            &trans  &trans  &trans  &trans  &trans  &trans
+&kp CLCK      &bt BT_PRV    &bt BT_NXT    &trans        &trans        &bt BT_CLR        &trans  &trans  &trans  &trans  &trans  &trans
+&trans        &trans        &trans        &trans        &trans        &bt BT_CLR_ALL    &trans  &trans  &trans  &trans  &trans  &trans
+                                          &trans        &trans        &trans            &trans  &trans  &trans
             >;
         };
     };
-};        
+};
